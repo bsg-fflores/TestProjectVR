@@ -11,6 +11,8 @@ namespace Player
         [SerializeField] private float _speed;
         public Transform cameraTransform; // Referencia a la cámara
 
+        [SerializeField] private GameObject playerSign;
+
         private void Awake()
         {
             // if (!photonView.IsMine)
@@ -24,6 +26,13 @@ namespace Player
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
+            
+            playerSign.SetActive(false);
+            
+            if (photonView.IsMine)
+            {
+                playerSign.SetActive(true);
+            }
         }
 
         private void Update()

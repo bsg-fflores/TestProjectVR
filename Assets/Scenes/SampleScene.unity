@@ -8848,6 +8848,9 @@ MonoBehaviour:
   playerPrefab: {fileID: 3645042931147402462, guid: e57df8d813132d14bb552766561e95c0,
     type: 3}
   playerSpawnPoint: {fileID: 526440800}
+  availableMaterials:
+  - {fileID: 2100000, guid: c56c233cd3e158e48ad43a45142cd9ec, type: 2}
+  - {fileID: 2100000, guid: bfe0f73db9b586446bd77fe79cdf34a5, type: 2}
 --- !u!4 &1742723200
 Transform:
   m_ObjectHideFlags: 0

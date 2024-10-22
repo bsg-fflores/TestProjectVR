@@ -8,6 +8,8 @@ namespace Player
         public GameObject playerPrefab;
         [SerializeField] Transform playerSpawnPoint;
         
+        [SerializeField] Material[] playerMaterials;
+        
         void Start()
         {
             SpawmPlayer();

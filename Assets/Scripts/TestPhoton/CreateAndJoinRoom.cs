@@ -31,7 +31,7 @@ namespace TestPhoton
         public override void OnJoinedRoom()
         {
             
-            SceneManager.LoadScene("SampleScene");
+            PhotonNetwork.LoadLevel("SampleScene");
         }
     }
 }
