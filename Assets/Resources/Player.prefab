@@ -296,6 +296,7 @@ MonoBehaviour:
   availableMaterials:
   - {fileID: 2100000, guid: c56c233cd3e158e48ad43a45142cd9ec, type: 2}
   - {fileID: 2100000, guid: bfe0f73db9b586446bd77fe79cdf34a5, type: 2}
+  playerMarker: {fileID: 0}
 --- !u!114 &7399126163427666309
 MonoBehaviour:
   m_ObjectHideFlags: 0
