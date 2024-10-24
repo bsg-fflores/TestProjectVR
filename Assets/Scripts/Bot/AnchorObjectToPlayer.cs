@@ -5,25 +5,29 @@ namespace Bot
 {
     public class AnchorObjectToPlayer : MonoBehaviour
     {
-        public Transform player;
-        public Vector3 offset;
+        private bool _playerIsNear = false;
+        private bool _isAnchored = false;
 
-        private void Awake()
-        {
-        }
-
-        private void Start()
-        {
-            player = GameObject.FindWithTag("Player").transform;
-            offset = new Vector3(0, 0.5f, 2);
-        }
-
-        private void OnCollisionEnter(Collision other)
+        private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                transform.SetParent(player);
-                transform.localPosition = offset;
+                _playerIsNear = true;
+                Debug.Log("Player is near");
+            }
+        }
+        
+        private void Update()
+        {
+            if (_playerIsNear && Input.GetKeyDown(KeyCode.E))
+            {
+                _isAnchored = !_isAnchored;
+                Debug.Log("Player is anchored: " + _isAnchored);
+            }
+            
+            if (_isAnchored)
+            {
+                transform.position = GameObject.FindGameObjectWithTag("Player").transform.position;
             }
         }
     }
