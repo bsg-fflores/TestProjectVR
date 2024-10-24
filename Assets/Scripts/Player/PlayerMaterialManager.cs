@@ -36,6 +36,7 @@ namespace Player
             assignedMaterialIndex = Random.Range(0, availableMaterials.Length);
 
             playerRenderer.material = availableMaterials[assignedMaterialIndex];
+            // playerMarker.playerSign.GetComponent<Renderer>().material = availableMaterials[assignedMaterialIndex];
 
             photonView.RPC("SyncMaterialWithOthers", RpcTarget.AllBuffered, assignedMaterialIndex);
         }
@@ -51,6 +52,7 @@ namespace Player
 
             assignedMaterialIndex = materialIndex;
             playerRenderer.material = availableMaterials[assignedMaterialIndex];
+            // playerMarker.playerSign.GetComponent<Renderer>().material = availableMaterials[assignedMaterialIndex];
         }
 
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
