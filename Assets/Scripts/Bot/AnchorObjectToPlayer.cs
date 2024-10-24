@@ -14,7 +14,7 @@ namespace Bot
             if (other.gameObject.CompareTag("Player"))
             {
                 _playerIsNear = true;
-                Debug.Log("Player is near");
+                // Debug.Log("Player is near");
             }
         }
         
