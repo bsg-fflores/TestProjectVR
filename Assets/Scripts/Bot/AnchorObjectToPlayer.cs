@@ -1,9 +1,10 @@
 using System;
+using Photon.Pun;
 using UnityEngine;
 
 namespace Bot
 {
-    public class AnchorObjectToPlayer : MonoBehaviour
+    public class AnchorObjectToPlayer : MonoBehaviourPun
     {
         private bool _playerIsNear = false;
         private bool _isAnchored = false;
@@ -19,9 +20,10 @@ namespace Bot
         
         private void Update()
         {
-            if (_playerIsNear && Input.GetKeyDown(KeyCode.E))
+            if (_playerIsNear && Input.GetKeyDown(KeyCode.E) && photonView.IsMine)
             {
                 _isAnchored = !_isAnchored;
+                photonView.RPC("AnchorPlayer", RpcTarget.AllBuffered, _isAnchored);
                 Debug.Log("Player is anchored: " + _isAnchored);
             }
             
@@ -29,6 +31,12 @@ namespace Bot
             {
                 transform.position = GameObject.FindGameObjectWithTag("Player").transform.position;
             }
+        }
+        
+        [PunRPC]
+        private void AnchorPlayer(bool isAnchored)
+        {
+            _isAnchored = isAnchored;
         }
     }
 }
