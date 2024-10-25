@@ -40,10 +40,11 @@ namespace Player
             {
                 _isAnchored = !_isAnchored;
                 photonView.RPC("AnchorPlayer", RpcTarget.AllBuffered, _isAnchored);
+                // _grabberGameObject.GetComponent<PhotonView>().RequestOwnership();
                 Debug.Log("Object is anchored: " + _isAnchored);
             }
 
-            if (_isAnchored)
+            if (_isAnchored && _grabberGameObject != null)
             {
                 _grabberGameObject.transform.position = transform.position;
             }
@@ -61,5 +62,19 @@ namespace Player
         {
             _isAnchored = isAnchored;
         }
+        
+        // photon serilize view
+        
+        // public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        // {
+        //     if (stream.IsWriting)
+        //     {
+        //         stream.SendNext(transform.position);
+        //     }
+        //     else
+        //     {
+        //         _grabberGameObject.transform.position = (Vector3)stream.ReceiveNext();
+        //     }
+        // }
     }
 }
