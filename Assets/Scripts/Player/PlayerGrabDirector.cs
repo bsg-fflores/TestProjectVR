@@ -19,6 +19,7 @@ namespace Player
                 Debug.Log("Object is near T");
                 _isObjectNear = true;
                 _grabberGameObject = other.gameObject;
+                photonView.RPC("NearObject", RpcTarget.AllBuffered, _isObjectNear);
             }
         }
         
@@ -28,11 +29,13 @@ namespace Player
             {
                 Debug.Log("Object is near F");
                 _isObjectNear = false;
+                photonView.RPC("NearObject", RpcTarget.AllBuffered, _isObjectNear);
             }
         }
 
         private void Update()
         {
+            
             if (_isObjectNear && Input.GetKeyDown(KeyCode.E))
             {
                 _isAnchored = !_isAnchored;
@@ -45,6 +48,12 @@ namespace Player
                 _grabberGameObject.transform.position = transform.position;
             }
             
+        }
+        
+        [PunRPC]
+        private void NearObject(bool isNear)
+        {
+            _isObjectNear = isNear;
         }
 
         [PunRPC]
