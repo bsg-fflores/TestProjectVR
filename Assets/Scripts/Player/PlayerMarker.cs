@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Player
 {
     // public class PlayerMarker : MonoBehaviourPun, IPunObservable
-    public class PlayerMarker : MonoBehaviourPun, IPunObservable
+    public class PlayerMarker : MonoBehaviourPun
     {
         public GameObject playerSign;
 
@@ -19,19 +19,26 @@ namespace Player
             if (photonView.IsMine)
             {
                 playerSign.SetActive(true);
+                photonView.RPC("SyncPlayerSignState", RpcTarget.AllBuffered, playerSign.activeSelf);
             }
         }
-        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        
+        [PunRPC]
+        public void SyncPlayerSignState(bool isActive)
         {
-            if (stream.IsWriting)
-            {
-                stream.SendNext(playerSign.activeSelf);
-            }
-            else
-            {
-                bool isActive = (bool)stream.ReceiveNext();
-                playerSign.SetActive(isActive);
-            }
+            playerSign.SetActive(isActive);
         }
+        // public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        // {
+        //     if (stream.IsWriting)
+        //     {
+        //         stream.SendNext(playerSign.activeSelf);
+        //     }
+        //     else
+        //     {
+        //         bool isActive = (bool)stream.ReceiveNext();
+        //         playerSign.SetActive(isActive);
+        //     }
+        // }
     }
 }

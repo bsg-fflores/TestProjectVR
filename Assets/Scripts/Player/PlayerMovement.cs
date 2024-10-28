@@ -8,10 +8,16 @@ namespace Player
     {
         private Rigidbody rb;
         private Vector3 movement;
-        [SerializeField] private float _speed;
+        [SerializeField] private float _speed = 5f;
         public Transform cameraTransform; // Referencia a la cámara
 
         [SerializeField] private GameObject playerSign;
+        
+        private float inputHorizontal;
+        private float inputVertical;
+        
+        private Vector3 forward;
+        private Vector3 right;
 
         private void Awake()
         {
@@ -27,11 +33,12 @@ namespace Player
         {
             rb = GetComponent<Rigidbody>();
             
-            playerSign.SetActive(false);
+            // playerSign.SetActive(false);
             
             if (photonView.IsMine)
             {
                 playerSign.SetActive(true);
+                photonView.RPC("SyncPlayerSignState", RpcTarget.AllBuffered, playerSign.activeSelf);
             }
         }
 
@@ -39,30 +46,36 @@ namespace Player
         {
 
             // Aplicar movimiento al Rigidbody
-            
-            
-        }
-
-        private void FixedUpdate()
-        {
             if (photonView.IsMine)
             {
-                float horizontal = Input.GetAxis("Horizontal");
-                float vertical = Input.GetAxis("Vertical");
+                inputHorizontal = Input.GetAxis("Horizontal");
+                inputVertical = Input.GetAxis("Vertical");
             
-                Vector3 forward = cameraTransform.forward;
-                Vector3 right = cameraTransform.right;
+                forward = cameraTransform.forward;
+                right = cameraTransform.right;
             
                 forward.y = 0f;
                 right.y = 0f;
 
                 forward.Normalize();
                 right.Normalize();
-            
-            
-                movement = (right * horizontal + forward * vertical) * (_speed * Time.deltaTime);
+                
+                movement = (right * inputHorizontal + forward * inputVertical);
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            if (photonView.IsMine)
+            {
                 rb.MovePosition(rb.position + movement * (_speed * Time.deltaTime));
             }
+        }
+        
+        [PunRPC]
+        public void SyncPlayerSignState(bool isActive)
+        {
+            playerSign.SetActive(isActive);
         }
     }
 }

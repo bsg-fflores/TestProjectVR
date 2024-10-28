@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4308379644416128813
 Transform:
   m_ObjectHideFlags: 0
@@ -241,9 +241,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!136 &4111800824692046624
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 190ab120d7f5deb4d85af427dc11bcd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 20
+  _speed: 5
   cameraTransform: {fileID: 0}
   playerSign: {fileID: 1747620060876434469}
 --- !u!114 &7715264693379198906
@@ -320,7 +320,6 @@ MonoBehaviour:
   - {fileID: 7715264693379198906}
   - {fileID: 2993466020657324031}
   - {fileID: 1620913650201259093}
-  - {fileID: 6549954217188516360}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -363,7 +362,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3645042931147402462}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 593f9b38d50147e9b3157b1347e7e81b, type: 3}
   m_Name: 
