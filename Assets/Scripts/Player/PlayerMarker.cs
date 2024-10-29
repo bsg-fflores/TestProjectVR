@@ -19,12 +19,12 @@ namespace Player
             if (photonView.IsMine)
             {
                 playerSign.SetActive(true);
-                photonView.RPC("SyncPlayerSignState", RpcTarget.AllBuffered, playerSign.activeSelf);
+                photonView.RPC("SyncPlayerSignState01", RpcTarget.AllBuffered, playerSign.activeSelf);
             }
         }
         
         [PunRPC]
-        public void SyncPlayerSignState(bool isActive)
+        public void SyncPlayerSignState01(bool isActive)
         {
             playerSign.SetActive(isActive);
         }
